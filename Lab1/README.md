@@ -64,3 +64,63 @@ Total steps: 4
 
 ### Result
 The Water Jug Problem was successfully solved using Breadth-First Search. The algorithm finds a sequence of valid operations to obtain exactly 2 litres of water in one of the jugs.
+
+
+
+
+# Vacuum Cleaner Problem
+
+## Objective
+To implement a simple AI Vacuum Cleaner Agent using State Space Search and Breadth-First Search (BFS).
+
+## Problem Description
+A vacuum cleaner operates in two rooms, A and B. Each room can be either clean or dirty.
+
+The objective is to clean both rooms by performing suitable actions.
+
+## Possible Actions
+- Clean the current room (Suck).
+- Move Right (from A to B).
+- Move Left (from B to A).
+
+## State Representation
+Each state is represented as:
+
+`(Location, Room A, Room B)`
+
+Where:
+- `A` or `B` represents the vacuum cleaner's current location.
+- `0` represents Dirty.
+- `1` represents Clean.
+
+Initial State: `('A', 0, 0)`
+
+Goal State: Both rooms must be clean.
+
+## Algorithm Used
+Breadth-First Search (BFS).
+
+BFS explores possible states level by level using a queue. Visited-state tracking prevents repeated exploration.
+
+## Execution
+
+```bash
+python3 vacuum_cleaner.py
+```
+
+## Sample Output
+
+```text
+Vacuum Cleaner Solution
+----------------------------
+Initial State: ('A', 0, 0)
+Clean Room A -> ('A', 1, 0)
+Move Right -> ('B', 1, 0)
+Clean Room B -> ('B', 1, 1)
+----------------------------
+Total steps: 3
+Both rooms are clean!
+```
+
+## Result
+The vacuum cleaner successfully cleans both rooms using BFS and reaches the goal state in three actions.
