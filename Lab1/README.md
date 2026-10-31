@@ -68,7 +68,7 @@ The Water Jug Problem was successfully solved using Breadth-First Search. The al
 
 
 
-# Vacuum Cleaner Problem
+## 2 . Vacuum Cleaner Problem
 
 ## Objective
 To implement a simple AI Vacuum Cleaner Agent using State Space Search and Breadth-First Search (BFS).
