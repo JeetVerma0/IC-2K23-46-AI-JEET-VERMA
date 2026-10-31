@@ -124,3 +124,54 @@ Both rooms are clean!
 
 ## Result
 The vacuum cleaner successfully cleans both rooms using BFS and reaches the goal state in three actions.
+
+
+## 3. Missionaries and Cannibals Problem
+
+## Objective
+To solve the Missionaries and Cannibals Problem using State Space Search and Breadth-First Search (BFS).
+
+## Problem Description
+Three missionaries and three cannibals are present on the left bank of a river. They must cross to the right bank using a boat that can carry a maximum of two people.
+
+The number of cannibals must never exceed the number of missionaries on either bank when missionaries are present.
+
+## State Representation
+
+Each state is represented as:
+
+`(M, C, B)`
+
+Where:
+- `M` = Number of missionaries on the left bank.
+- `C` = Number of cannibals on the left bank.
+- `B` = Boat position (0 = Left, 1 = Right).
+
+Initial State: `(3, 3, 0)`
+
+Goal State: `(0, 0, 1)`
+
+## Possible Boat Movements
+- 1 Missionary
+- 2 Missionaries
+- 1 Cannibal
+- 2 Cannibals
+- 1 Missionary and 1 Cannibal
+
+## Algorithm Used
+Breadth-First Search (BFS).
+
+The algorithm explores valid states using a queue and avoids unsafe states where cannibals outnumber missionaries.
+
+## Execution
+
+```bash
+python3 missionaries_cannibals.py
+```
+
+## Expected Result
+
+The algorithm finds a valid sequence of 11 boat crossings, transferring all six people safely to the opposite bank.
+
+## Result
+The problem was successfully solved using BFS while maintaining the safety constraints on both river banks.
