@@ -175,3 +175,87 @@ The algorithm finds a valid sequence of 11 boat crossings, transferring all six 
 
 ## Result
 The problem was successfully solved using BFS while maintaining the safety constraints on both river banks.
+
+
+## 4. State Space Representation using 8-Puzzle
+
+## Objective
+To represent the 8-Puzzle problem as a state space and generate all possible next states by moving the blank tile.
+
+## Problem Description
+The 8-Puzzle consists of a 3 × 3 board containing eight numbered tiles and one empty space represented by `0`.
+
+The objective is to understand how a given state can be transformed into other valid states by moving the empty space.
+
+## Initial State
+
+```text
+1 2 3
+4 0 6
+7 5 8
+```
+
+## Goal State
+
+```text
+1 2 3
+4 5 6
+7 8 0
+```
+
+## Possible Operations
+- Move blank tile Up.
+- Move blank tile Down.
+- Move blank tile Left.
+- Move blank tile Right.
+
+A movement is allowed only when the blank tile does not cross the boundary of the 3 × 3 board.
+
+## State Representation
+The puzzle is represented using a tuple of nine elements.
+
+The value `0` represents the blank tile.
+
+## Execution
+
+```bash
+python3 state_space_representation.py
+```
+
+## Sample Output
+
+```text
+Initial State:
+1 2 3
+4 0 6
+7 5 8
+
+Goal State:
+1 2 3
+4 5 6
+7 8 0
+
+Possible Next States:
+Move Up
+1 0 3
+4 2 6
+7 5 8
+
+Move Down
+1 2 3
+4 5 6
+7 0 8
+
+Move Left
+1 2 3
+0 4 6
+7 5 8
+
+Move Right
+1 2 3
+4 6 0
+7 5 8
+```
+
+## Result
+The 8-Puzzle was successfully represented using a state-space approach. All four valid successor states were generated from the given initial configuration.
