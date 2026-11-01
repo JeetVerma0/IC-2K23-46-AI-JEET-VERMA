@@ -436,3 +436,210 @@ The algorithm explored available paths, avoided obstacles, maintained visited po
 A valid path from the starting position to the goal was found in eight movements.
 
 This experiment demonstrates how DFS can be applied to maze-solving and basic navigation problems.
+
+
+## 4 — Robot Navigation using Breadth-First Search (BFS)
+
+### Objective
+
+To implement a robot navigation system using Breadth-First Search (BFS) to find the shortest path from a starting position to a destination while avoiding obstacles in a grid environment.
+
+### Problem Description
+
+A robot operates in a two-dimensional grid environment containing free cells and obstacles.
+
+The robot starts at a predefined position and must reach a destination by moving through available cells without crossing obstacles.
+
+The objective is to find the shortest possible path between the starting position and the goal.
+
+### Environment Representation
+
+The environment is represented using a 5 × 5 grid.
+
+The following symbols are used:
+
+| Symbol | Meaning |
+|---|---|
+| S | Starting position |
+| G | Goal or destination |
+| 0 | Free cell |
+| 1 | Obstacle |
+| * | Calculated path |
+
+**Initial Grid:**
+
+```text
+S 0 0 1 0
+1 1 0 1 0
+0 0 0 0 0
+0 1 1 1 0
+0 0 0 0 G
+```
+
+Starting Position: `(0, 0)`
+
+Goal Position: `(4, 4)`
+
+### Algorithm Used: Breadth-First Search (BFS)
+
+Breadth-First Search is an uninformed search algorithm that explores neighboring states level by level.
+
+It uses a Queue data structure following the FIFO (First In, First Out) principle.
+
+Since every movement in the grid has an equal cost, BFS guarantees finding the shortest path if a valid path exists.
+
+### Possible Robot Movements
+
+The robot can move in four directions:
+
+- Right: `(0, +1)`
+- Down: `(+1, 0)`
+- Left: `(0, -1)`
+- Up: `(-1, 0)`
+
+A movement is considered valid only when:
+
+- The new position is within the grid boundaries.
+- The destination cell is not an obstacle.
+- The position has not already been visited.
+
+### Working Procedure
+
+- Initialize the BFS queue with the robot's starting position.
+- Mark the starting position as visited.
+- Remove the front position from the queue.
+- Check whether the current position is the goal.
+- Generate all possible neighboring positions.
+- Reject positions that are outside the grid, blocked by obstacles or already visited.
+- Add valid positions to the queue.
+- Store the parent of each newly discovered position.
+- Continue until the destination is reached or the queue becomes empty.
+- Reconstruct the shortest path using the stored parent information.
+
+### State Representation
+
+Each state represents the robot's current position in the grid.
+
+A state is represented as:
+
+`(row, column)`
+
+For example:
+
+`(2, 3)`
+
+represents the cell located at row 2 and column 3.
+
+The program uses three important data structures:
+
+- **Queue:** Stores positions waiting to be explored.
+- **Visited Set:** Prevents revisiting previously explored positions.
+- **Parent Dictionary:** Stores the previous position of each discovered state to reconstruct the solution path.
+
+### Solution Path
+
+The BFS algorithm finds the following path:
+
+```text
+(0,0) → (0,1) → (0,2) → (1,2)
+→ (2,2) → (2,3) → (2,4) → (3,4) → (4,4)
+```
+
+The robot reaches its destination after eight movements.
+
+### Final Navigation Grid
+
+```text
+S * * 1 0
+1 1 * 1 0
+0 0 * * *
+0 1 1 1 *
+0 0 0 0 G
+```
+
+The `*` symbols represent the shortest path selected by BFS.
+
+### Time and Space Complexity
+
+Let R represent the number of rows and C represent the number of columns.
+
+| Complexity | Value |
+|---|---|
+| Time Complexity | O(R × C) |
+| Space Complexity | O(R × C) |
+
+Each grid cell is visited at most once. The queue, visited set and parent dictionary require memory proportional to the total number of cells.
+
+### Python Implementation Details
+
+**File:** `robot_navigation.py`
+
+**Language:** Python 3
+
+**Concepts Used:**
+- Breadth-First Search
+- Queue data structure
+- Grid-based search
+- State-space representation
+- Visited-state tracking
+- Path reconstruction
+- Coordinate-based movement
+
+**Library Used:**
+
+`collections.deque` is used to implement an efficient queue.
+
+No external libraries are required.
+
+### Execution Instructions
+
+Run the following command from the project root directory:
+
+```bash
+python3 lab2/robot_navigation.py
+```
+
+### Sample Output
+
+```text
+Robot Navigation using BFS
+----------------------------
+
+Original Grid:
+S 0 0 1 0
+1 1 0 1 0
+0 0 0 0 0
+0 1 1 1 0
+0 0 0 0 G
+
+Shortest Path Found!
+Path: [(0, 0), (0, 1), (0, 2), (1, 2), (2, 2), (2, 3), (2, 4), (3, 4), (4, 4)]
+
+Navigation Grid:
+S * * 1 0
+1 1 * 1 0
+0 0 * * *
+0 1 1 1 *
+0 0 0 0 G
+
+Total Steps: 8
+```
+
+### Applications
+
+- Autonomous robot navigation.
+- Warehouse automation.
+- Grid-based pathfinding.
+- Navigation in obstacle-filled environments.
+- Basic game AI.
+- Automated movement planning.
+
+### Result and Conclusion
+
+The robot successfully navigated through the grid environment using Breadth-First Search.
+
+The algorithm avoided obstacles, explored valid neighboring positions and reconstructed the shortest path from the starting position to the destination.
+
+The destination was reached in eight movements.
+
+This experiment demonstrates the application of BFS in grid-based navigation and shortest-path problems.
