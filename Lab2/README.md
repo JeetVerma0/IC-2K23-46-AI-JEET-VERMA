@@ -643,3 +643,185 @@ The algorithm avoided obstacles, explored valid neighboring positions and recons
 The destination was reached in eight movements.
 
 This experiment demonstrates the application of BFS in grid-based navigation and shortest-path problems.
+
+
+
+## 5 — Route Planning using Breadth-First Search (BFS)
+
+### Objective
+
+To implement a route-planning system using Breadth-First Search (BFS) to determine the shortest route between a starting location and a destination in an unweighted graph.
+
+### Problem Description
+
+Route planning involves finding a suitable path between two locations through a network of connected roads.
+
+In this experiment, locations are represented as vertices of a graph, while roads connecting those locations are represented as edges.
+
+The objective is to find a route from a given starting location to a destination using BFS.
+
+The algorithm explores neighboring locations level by level and finds a route containing the minimum number of road segments.
+
+### Graph Representation
+
+The road network is represented using an adjacency list.
+
+The graph contains seven locations:
+
+A, B, C, D, E, F and G.
+
+**Available Connections:**
+
+```text
+A -> B, C
+B -> A, D, E
+C -> A, F
+D -> B, G
+E -> B, G
+F -> C, G
+G -> D, E, F
+```
+
+The graph is undirected, meaning that movement between connected locations is possible in both directions.
+
+Starting Location: `A`
+
+Destination: `G`
+
+### Algorithm Used: Breadth-First Search (BFS)
+
+Breadth-First Search is an uninformed graph-search algorithm that explores neighboring vertices level by level.
+
+It uses a Queue data structure following the FIFO (First In, First Out) principle.
+
+In an unweighted graph, BFS guarantees a route with the minimum number of edges between the starting vertex and the destination, provided a path exists.
+
+### Working Procedure
+
+- Initialize a queue with the starting location.
+- Mark the starting location as visited.
+- Remove the front location from the queue.
+- Check whether the current location is the destination.
+- Explore all unvisited neighboring locations.
+- Mark each newly discovered location as visited.
+- Store the parent location of each newly discovered vertex.
+- Insert the neighboring locations into the queue.
+- Continue until the destination is found or the queue becomes empty.
+- Reconstruct the route using the parent dictionary.
+
+### State Representation
+
+Each state represents the current location in the road network.
+
+A state is represented by a vertex:
+
+`A, B, C, D, E, F, G`
+
+The program uses three important data structures:
+
+- **Queue:** Stores locations waiting to be explored.
+- **Visited Set:** Prevents repeated exploration of locations.
+- **Parent Dictionary:** Stores the previous location for each discovered vertex and helps reconstruct the route.
+
+### Solution Path
+
+Starting Location: `A`
+
+Destination: `G`
+
+The BFS algorithm finds the following route:
+
+```text
+A → B → D → G
+```
+
+The route contains four locations and three road segments.
+
+Another route with the same number of road segments may also exist, depending on the graph and neighbor exploration order.
+
+### Time and Space Complexity
+
+Let V represent the number of vertices and E represent the number of edges.
+
+| Complexity | Value |
+|---|---|
+| Time Complexity | O(V + E) |
+| Space Complexity | O(V) |
+
+BFS visits each vertex at most once and examines the adjacency list of each visited vertex.
+
+The queue, visited set and parent dictionary require additional memory proportional to the number of vertices.
+
+### Python Implementation Details
+
+**File:** `route_planning.py`
+
+**Language:** Python 3
+
+**Concepts Used:**
+- Breadth-First Search
+- Graph representation
+- Adjacency lists
+- Queue data structure
+- Visited-state tracking
+- Parent tracking
+- Path reconstruction
+
+**Library Used:**
+
+`collections.deque` is used to implement an efficient queue.
+
+No external libraries are required.
+
+### Execution Instructions
+
+Run the following command from the project root directory:
+
+```bash
+python3 lab2/route_planning.py
+```
+
+### Sample Output
+
+```text
+Route Planning using BFS
+--------------------------
+
+Available Locations and Roads:
+A -> ['B', 'C']
+B -> ['A', 'D', 'E']
+C -> ['A', 'F']
+D -> ['B', 'G']
+E -> ['B', 'G']
+F -> ['C', 'G']
+G -> ['D', 'E', 'F']
+
+Starting Location: A
+Destination: G
+
+Shortest Route Found:
+A -> B -> D -> G
+Total Locations: 4
+Total Road Segments: 3
+```
+
+### Applications
+
+- Route planning in road networks.
+- Network routing.
+- Navigation systems.
+- Social network connection analysis.
+- Pathfinding in games.
+- Finding minimum-hop paths between connected systems.
+
+### Result and Conclusion
+
+The route-planning problem was successfully implemented using Breadth-First Search.
+
+The algorithm explored the available locations, avoided repeated visits and reconstructed a route from the starting location A to the destination G.
+
+The selected route contained three road segments.
+
+This experiment demonstrates the application of BFS in graph-based route planning and shortest-path problems in unweighted networks.
+
+**Limitation:** The implementation considers all road segments to have equal cost. It minimizes the number of edges rather than actual travel distance or time.
