@@ -250,3 +250,189 @@ The graph was successfully traversed using both Breadth-First Search and Depth-F
 BFS explored the graph level by level using a queue, whereas DFS explored deeper vertices using recursion and backtracking.
 
 The experiment demonstrates the difference between breadth-wise and depth-wise graph exploration and the importance of selecting an appropriate traversal algorithm for a given problem.
+
+
+
+## 3 — Maze Solver using Depth-First Search (DFS)
+
+### Objective
+
+To implement a Maze Solver using Depth-First Search (DFS) and find a valid path from a starting position to a destination while avoiding obstacles.
+
+### Problem Description
+
+A maze is represented as a two-dimensional grid consisting of open paths and blocked cells.
+
+The objective is to find a path from the starting position (S) to the goal position (G).
+
+The program uses DFS to explore possible paths. If a particular direction does not lead to the goal, the algorithm backtracks and explores another available direction.
+
+### Maze Representation
+
+The maze is represented using a 5 × 5 matrix.
+
+The following symbols are used:
+
+| Symbol | Meaning |
+|---|---|
+| S | Starting position |
+| G | Goal position |
+| 0 | Open path |
+| 1 | Wall or obstacle |
+| * | Final solution path |
+
+**Initial Maze:**
+
+```text
+S 0 1 0 0
+1 0 1 0 1
+0 0 0 0 1
+0 1 1 0 0
+0 0 0 1 G
+```
+
+Starting Position: `(0, 0)`
+
+Goal Position: `(4, 4)`
+
+### Algorithm Used: Depth-First Search (DFS)
+
+Depth-First Search is a graph traversal algorithm that explores one possible path as deeply as possible before backtracking.
+
+In this experiment, DFS is implemented recursively to explore the neighboring cells of the current position.
+
+### Working Procedure
+
+- Start from the initial position `(0, 0)`.
+- Check whether the current position is within the maze boundaries.
+- Reject the position if it is a wall or has already been visited.
+- Mark the current position as visited and add it to the current path.
+- Check whether the current position is the goal.
+- Explore neighboring cells in the following order:
+  - Down
+  - Right
+  - Up
+  - Left
+- If a direction does not lead to the goal, backtrack and explore another direction.
+- Stop when the goal is reached or all possible paths have been explored.
+
+### State Representation
+
+Each state represents the current position of the search algorithm in the maze.
+
+A state is represented as:
+
+`(row, column)`
+
+For example:
+
+`(2, 3)`
+
+represents the cell at row 2 and column 3.
+
+The algorithm maintains two important data structures:
+
+- **Visited Set:** Stores positions that have already been explored.
+- **Path List:** Stores the current sequence of positions from the start to the destination.
+
+### Solution Path
+
+The DFS algorithm finds the following valid path:
+
+```text
+(0,0) → (0,1) → (1,1) → (2,1)
+→ (2,2) → (2,3) → (3,3) → (3,4) → (4,4)
+```
+
+The destination is successfully reached after eight movements.
+
+### Solved Maze
+
+```text
+S * 1 0 0
+1 * 1 0 1
+0 * * * 1
+0 1 1 * *
+0 0 0 1 G
+```
+
+The `*` symbols represent the path selected by DFS.
+
+### Time and Space Complexity
+
+Let R represent the number of rows and C represent the number of columns.
+
+| Complexity | Value |
+|---|---|
+| Time Complexity | O(R × C) |
+| Space Complexity | O(R × C) |
+
+Each cell is visited at most once. The visited set and recursion stack require additional memory proportional to the number of cells.
+
+### Python Implementation Details
+
+**File:** `maze_solver.py`
+
+**Language:** Python 3
+
+**Concepts Used:**
+- Depth-First Search
+- Recursion
+- Backtracking
+- Two-dimensional arrays
+- Sets and lists
+- Coordinate-based movement
+
+No external libraries are required.
+
+### Execution Instructions
+
+Run the following command from the project root directory:
+
+```bash
+python3 lab2/maze_solver.py
+```
+
+### Sample Output
+
+```text
+Maze Solver using DFS
+----------------------
+
+Original Maze:
+S 0 1 0 0
+1 0 1 0 1
+0 0 0 0 1
+0 1 1 0 0
+0 0 0 1 G
+
+Path Found!
+Path: [(0, 0), (0, 1), (1, 1), (2, 1), (2, 2), (2, 3), (3, 3), (3, 4), (4, 4)]
+
+Solved Maze:
+S * 1 0 0
+1 * 1 0 1
+0 * * * 1
+0 1 1 * *
+0 0 0 1 G
+
+Total Steps: 8
+```
+
+### Applications
+
+- Robot navigation and path exploration.
+- Solving puzzles and labyrinths.
+- Game environment exploration.
+- Exploring connected components.
+- Pathfinding in grid-based environments.
+
+### Result and Conclusion
+
+The maze was successfully solved using Depth-First Search.
+
+The algorithm explored available paths, avoided obstacles, maintained visited positions and used backtracking when necessary.
+
+A valid path from the starting position to the goal was found in eight movements.
+
+This experiment demonstrates how DFS can be applied to maze-solving and basic navigation problems.
