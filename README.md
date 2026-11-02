@@ -29,7 +29,7 @@ This lab covers basic AI problems involving state-space representation, possible
 - Problem formulation
 - Search space exploration
 
-[View Lab 1 – Source Code and Documentation](lab1/README.md)
+[View Lab 1 – Source Code and Documentation](Lab1/README.md)
 
 ---
 
@@ -56,7 +56,7 @@ This lab focuses on search techniques used to explore graphs, solve puzzles and 
 - Grid-based navigation
 - Shortest-path search in unweighted graphs
 
-[View Lab 2 – Source Code and Documentation](lab2/README.md)
+[View Lab 2 – Source Code and Documentation](Lab2/README.md)
 
 ---
 
