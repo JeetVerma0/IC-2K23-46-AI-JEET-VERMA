@@ -1,0 +1,28 @@
+============================================================
+LAB 3: FEATURE ENGINEERING PIPELINE SUMMARY
+============================================================
+Random Seed (Reproducibility) : 42
+Train-Test Ratio              : 80% / 20%
+
+Data Shapes:
+- Raw Features (X)            : (215, 16)
+- Raw Target (y)              : (215,)
+- Processed X_train           : (172, 18)
+- Processed X_test            : (43, 18)
+- Training Labels (y_train)   : (172,)
+- Testing Labels (y_test)     : (43,)
+
+Engineered Features Created   :
+1. academic_avg               : Combined mean percentage across school and UG
+2. academic_consistency       : Metric of score volatility across degrees
+3. pg_ug_ratio                : PG MBA to UG Degree percentage ratio
+4. high_achiever              : Multi-tier high achievement boolean indicator
+
+Top 5 Features by ANOVA F-Score:
+     Feature    F_Score  Mutual_Info
+academic_avg 117.364293     0.248356
+       ssc_p  97.174838     0.217630
+    degree_p  61.900094     0.161458
+ pg_ug_ratio  59.899220     0.169546
+       hsc_p  48.870893     0.135397
+============================================================
