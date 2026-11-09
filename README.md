@@ -2,9 +2,9 @@
 
 This repository contains practical implementations of problems, algorithms, frameworks, and knowledge representation models studied as part of my Artificial Intelligence laboratory coursework.
 
-The experiments are implemented in Python and span across fundamental AI problem-solving paradigms: state-space representation, uninformed search algorithms, graph traversal and pathfinding, tabular data preparation and feature engineering pipelines, as well as symbolic knowledge representation and automated logical reasoning.
+The experiments are implemented in Python and span across fundamental AI problem-solving paradigms: state-space representation, uninformed search algorithms, graph traversal and pathfinding, tabular data preparation and feature engineering pipelines, symbolic knowledge representation and automated logical reasoning, interpretable decision tree classifiers, as well as foundational deep learning with PyTorch.
 
-The primary objective is to gain hands-on, foundational experience in representing real-world problems mathematically and symbolically, designing search and reasoning algorithms, and preparing data for intelligent decision-making systems.
+The primary objective is to gain hands-on, foundational experience in representing real-world problems mathematically and symbolically, designing search and reasoning algorithms, preparing data for intelligent decision-making systems, and training neural architectures using gradient-based optimization.
 
 ---
 
@@ -107,6 +107,59 @@ This lab explores symbolic AI and classical knowledge representation methodologi
 
 ---
 
+### Lab 5 — Decision Tree Classifier
+
+This lab covers white-box supervised classification using Scikit-Learn's `DecisionTreeClassifier` on the Campus Placement dataset. It demonstrates how to predict recruitment outcomes (`Placed` vs. `Not Placed`) while eliminating post-outcome target leakage, constructing leak-free preprocessing pipelines, evaluating multi-class metrics, visualizing tree architectures, and diagnosing overfitting.
+
+| Experiment | Description | Technique / Deliverable |
+|---|---|---|
+| Placement Classification Pipeline | End-to-end classification workflow: EDA, leakage prevention, `ColumnTransformer` preprocessing, 80:20 stratified split, evaluation, tree visualization, and depth tuning. | [`Lab5/decision_tree_classifier.ipynb`](Lab5/decision_tree_classifier.ipynb) |
+| Reusable Decision Tree Engine | Modular Python implementation providing functions for dataset loading, feature preparation, pipeline training, evaluation, and diagnostic plot exporting. | [`Lab5/decision_tree_model.py`](Lab5/decision_tree_model.py) |
+| Diagnostic Visualizations | High-resolution exports of test-set confusion matrix, decision tree topology splits, and Gini feature importances. | [`Lab5/outputs/`](Lab5/outputs/) (`confusion_matrix.png`, `decision_tree.png`, `feature_importance.png`) |
+
+**Concepts covered:**
+- Feature matrix ($X$) and target vector ($y$) formulation
+- Prevention of catastrophic target leakage (`salary` dropped due to post-placement dependency)
+- Non-predictive identifier removal (`sl_no`)
+- Leak-free preprocessing pipelines (`ColumnTransformer`, `SimpleImputer`, `OneHotEncoder`)
+- Stratified train-test splitting (80:20 ratio, `random_state=42`)
+- Gini Impurity minimization and recursive binary partitioning (CART)
+- Model evaluation: Accuracy ($69.77\%$), Precision ($75.76\%$), Recall ($83.33\%$), F1-Score ($79.37\%$), Confusion Matrix, and Classification Report
+- Decision tree topology visualization (`plot_tree`) and continuous threshold analysis
+- Gini feature importance (identifying secondary percentage `ssc_p` as dominant predictor at $44.78\%$)
+- Variance inflation, overfitting mechanics at deep levels, and depth pre-pruning (`max_depth=2` achieving $79.07\%$ test accuracy)
+
+[View Lab 5 – Source Code and Documentation](Lab5/README.md)
+
+---
+
+### Lab 6 — Deep Learning using PyTorch
+
+This lab introduces fundamental deep learning concepts using **PyTorch** (`torch`), progressing from multidimensional tensor manipulation and automatic differentiation (`torch.autograd`) to parametric single-layer linear regression and non-linear classification with a Multi-Layer Perceptron (MLP).
+
+| Experiment | Description | Technique / Deliverable |
+|---|---|---|
+| PyTorch Basics & Autograd | Multidimensional tensor creation, indexing, slicing, reshaping (`view`), matrix multiplication (`@`), dynamic computational graphs, and reverse-mode differentiation (`.backward()`). | [`Lab6/pytorch_basics.ipynb`](Lab6/pytorch_basics.ipynb) |
+| Linear Regression using PyTorch | Parametric regression on synthetic data ($y=3.5x+12.0+\epsilon$): `torch.nn.Linear`, `nn.MSELoss`, `optim.SGD`, 150-epoch training loop, $R^2$ evaluation ($96.19\%$), and fit plotting. | [`Lab6/linear_regression.ipynb`](Lab6/linear_regression.ipynb) |
+| Neural Network Fundamentals | Non-linear binary classification on synthetic moons data using a modular feedforward neural network (`Linear -> ReLU -> Linear`), `BCEWithLogitsLoss`, Adam optimization, and decision boundary visualization. | [`Lab6/neural_network_basics.py`](Lab6/neural_network_basics.py) |
+| Deep Learning Visualizations | Exported loss curves and diagnostic plots: training loss descent, regression fit line, and non-linear classification decision boundary contour. | [`Lab6/outputs/`](Lab6/outputs/) (`training_loss.png`, `actual_vs_predicted.png`, `neural_network_results.png`) |
+
+**Concepts covered:**
+- Multidimensional PyTorch tensors, metadata (`shape`, `ndim`, `dtype`, `device`), and zero-copy NumPy interoperability
+- Vectorized arithmetic, dot products, and matrix multiplication (`torch.matmul`, `@`)
+- Dynamic computational graphs (Directed Acyclic Graphs) and Autograd gradient tracking (`requires_grad=True`, `grad_fn`)
+- Analytical vs. automatic reverse-mode differentiation (`.backward()`, `x.grad`) and gradient suppression (`torch.no_grad()`)
+- Subclassing `torch.nn.Module` for custom layer definitions and forward propagation
+- Loss functions: Mean Squared Error (`nn.MSELoss`) and Binary Cross-Entropy (`nn.BCEWithLogitsLoss`)
+- Optimizers: Stochastic Gradient Descent (`optim.SGD`) and Adaptive Moment Estimation (`optim.Adam`)
+- Canonical 5-step PyTorch training lifecycle (forward pass $\to$ loss computation $\to$ `zero_grad` $\to$ `loss.backward` $\to$ `optimizer.step`)
+- Non-linear representation learning via Rectified Linear Units (`ReLU`)
+- Quantitative evaluation ($R^2$, RMSE, Accuracy: $95.00\%$, Precision, Recall, Confusion Matrix) and visual decision boundary mapping
+
+[View Lab 6 – Source Code and Documentation](Lab6/README.md)
+
+---
+
 ## Algorithms and Methods Implemented
 
 ### Breadth-First Search (BFS)
@@ -137,6 +190,18 @@ Object-oriented knowledge representation that resolves slot queries locally firs
 Data-driven inference engine that matches active fact premises against production rules, asserting newly derived conclusions into working memory until saturation.
 - **Used in:** University academic prerequisite pipelines, educational medical symptom evaluation, and Conceptual Dependency decomposition.
 
+### Decision Tree Classification (CART Algorithm)
+Non-parametric recursive partitioning that recursively minimizes Gini Impurity to construct interpretable, axis-parallel orthogonal decision boundaries.
+- **Used in:** Student campus placement prediction (`Placed` vs. `Not Placed`) with depth pre-pruning to combat overfitting.
+
+### Automatic Differentiation & Dynamic Graphs (PyTorch Autograd)
+Reverse-mode automatic differentiation that dynamically constructs Directed Acyclic Graphs during forward propagation and evaluates exact parameter gradients via the chain rule.
+- **Used in:** Computing gradients $\frac{\partial \mathcal{L}}{\partial W}$ and $\frac{\partial \mathcal{L}}{\partial b}$ for parametric neural models.
+
+### Parametric Deep Learning Optimization
+Iterative optimization algorithms updating continuous parameter tensors along negative gradient vectors to minimize empirical loss surfaces.
+- **Used in:** Linear regression using SGD with MSE loss, and non-linear Multi-Layer Perceptron (MLP) classification using Adam with BCEWithLogitsLoss.
+
 ---
 
 ## Technologies and Tools
@@ -144,12 +209,13 @@ Data-driven inference engine that matches active fact premises against productio
 | Technology / Library | Version / Role | Purpose |
 |---|---|---|
 | **Python 3** | `>= 3.10` | Core programming language for all algorithms and models. |
+| **PyTorch (`torch`)** | `2.15.0+cpu` | Deep learning framework, tensor computation, autograd, and neural architectures. |
 | **NumPy** | `2.5.3` | High-performance numerical computing and array operations. |
 | **Pandas** | `3.0.6` | Tabular data manipulation, cleaning, aggregation, and encoding. |
 | **Matplotlib** | `3.11.2` | Plotting, axes formatting, and figure visualization. |
 | **Seaborn** | `0.13.2` | Statistical data visualization (distributions, heatmaps, boxplots). |
-| **Scikit-learn** | `1.9.1` | Data preprocessing transformations and statistical feature selection. |
-| **Jupyter Notebook** | Interactive Lab 3 execution | Interactive execution and visualization rendering. |
+| **Scikit-learn** | `1.9.1` | Data preprocessing transformations, statistical feature selection, Decision Trees, and metrics. |
+| **Jupyter Notebook** | Interactive Notebooks | Interactive execution and visualization rendering for Labs 3, 5, and 6. |
 | **Git & GitHub** | Version Control | Source code tracking, documentation, and repository management. |
 
 ---
@@ -181,19 +247,34 @@ Artificial_Intelligence/
 │   ├── eda_visualization.ipynb
 │   ├── feature_engineering.ipynb
 │   └── outputs/                       # Exported visualization figures
-└── Lab4/                              # Lab 4: Knowledge Representation & Reasoning
+├── Lab4/                              # Lab 4: Knowledge Representation & Reasoning
+│   ├── README.md
+│   ├── predicate_representation.py
+│   ├── semantic_network.py
+│   ├── frame_representation.py
+│   └── logical_rule_engine.py
+├── Lab5/                              # Lab 5: Decision Tree Classifier
+│   ├── README.md
+│   ├── decision_tree_classifier.ipynb
+│   ├── decision_tree_model.py
+│   └── outputs/                       # Exported confusion matrix, tree, feature importance
+└── Lab6/                              # Lab 6: Deep Learning using PyTorch
     ├── README.md
-    ├── predicate_representation.py
-    ├── semantic_network.py
-    ├── frame_representation.py
-    └── logical_rule_engine.py
+    ├── pytorch_basics.ipynb
+    ├── linear_regression.ipynb
+    ├── neural_network_basics.py
+    └── outputs/                       # Exported loss curves, regression fit, decision boundary
 ```
 
 ---
 
 ## Running the Programs
 
-Ensure **Python 3** is installed. Navigate to the repository root directory before executing any command.
+Ensure **Python 3** and required libraries are installed. Navigate to the repository root directory before executing any command:
+
+```bash
+cd /home/jeet/Desktop/Artificial_Intelligence
+```
 
 ### Running Search & Problem-Solving Experiments (Lab 1 & Lab 2)
 Each script runs standalone with no external dependencies:
@@ -213,30 +294,37 @@ python3 Lab2/robot_navigation.py
 python3 Lab2/route_planning.py
 ```
 
-### Running Data Preparation & Visualization Notebooks (Lab 3)
-Install required data science libraries and start Jupyter:
-
+### Running Data Preparation Notebooks (Lab 3)
 ```bash
-pip install numpy pandas matplotlib seaborn scikit-learn jupyterlab
 jupyter notebook Lab3/
 ```
-Open and execute [`data_preprocessing.ipynb`](Lab3/data_preprocessing.ipynb), [`eda_visualization.ipynb`](Lab3/eda_visualization.ipynb), or [`feature_engineering.ipynb`](Lab3/feature_engineering.ipynb).
+Execute [`data_preprocessing.ipynb`](Lab3/data_preprocessing.ipynb), [`eda_visualization.ipynb`](Lab3/eda_visualization.ipynb), or [`feature_engineering.ipynb`](Lab3/feature_engineering.ipynb).
 
 ### Running Knowledge Representation & Reasoning Systems (Lab 4)
-Execute each experiment directly using standard Python:
-
 ```bash
-# Experiment 1: Predicate Logic & Truth Inference
 python3 Lab4/predicate_representation.py
-
-# Experiment 2: Semantic Networks & Property Inheritance
 python3 Lab4/semantic_network.py
-
-# Experiment 3: Frame Structures & Slot Resolution
 python3 Lab4/frame_representation.py
-
-# Experiment 4: Forward Chaining Rule Engine & Conceptual Dependency
 python3 Lab4/logical_rule_engine.py
+```
+
+### Running Decision Tree Experiments (Lab 5)
+```bash
+# Execute standalone model script
+python3 Lab5/decision_tree_model.py
+
+# Or launch the interactive notebook
+jupyter notebook Lab5/decision_tree_classifier.ipynb
+```
+
+### Running PyTorch Deep Learning Experiments (Lab 6)
+```bash
+# Execute standalone neural network classifier script
+python3 Lab6/neural_network_basics.py
+
+# Or launch the interactive PyTorch notebooks
+jupyter notebook Lab6/pytorch_basics.ipynb
+jupyter notebook Lab6/linear_regression.ipynb
 ```
 
 ---
@@ -244,11 +332,11 @@ python3 Lab4/logical_rule_engine.py
 ## Documentation
 
 Each laboratory directory contains a dedicated, comprehensive `README.md` file providing:
-- Formal theoretical background and problem formulations
+- Formal theoretical background and mathematical formulations
 - Algorithm step-by-step procedures and complexity analysis
-- Architectural and workflow diagrams
+- Architectural, flowchart, and computational graph diagrams
 - Verified source code implementations and execution outputs
-- Methodological observations, comparisons, and learning outcomes
+- Methodological observations, performance comparisons, and learning outcomes
 
 ---
 
@@ -260,3 +348,5 @@ The repository reflects ongoing coursework in Artificial Intelligence:
 - [x] **Lab 2**: Search Algorithms, Graph Traversal, and Grid Navigation (Complete)
 - [x] **Lab 3**: AI Programming Frameworks, Data Preprocessing, EDA, and Feature Engineering (Complete)
 - [x] **Lab 4**: Knowledge Representation, Semantic Networks, Frames, and Rule Engines (Complete)
+- [x] **Lab 5**: Decision Tree Classification, Interpretability, and Overfitting Regularization (Complete)
+- [x] **Lab 6**: Deep Learning using PyTorch, Autograd, Linear Regression, and Neural Networks (Complete)
