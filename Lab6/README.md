@@ -448,3 +448,4 @@ jupyter nbconvert --to notebook --execute --inplace Lab6/linear_regression.ipynb
 3. **Russell, S., & Norvig, P.** (2020). *Artificial Intelligence: A Modern Approach* (4th ed.). Pearson. (Chapter 21: Deep Learning).
 4. **Kingma, D. P., & Ba, J.** (2014). *Adam: A Method for Stochastic Optimization*. International Conference on Learning Representations (ICLR).
 5. **PyTorch Official Documentation**. *Deep Learning with PyTorch: A 60 Minute Blitz & Autograd Mechanics*. https://pytorch.org/docs/stable/
+
