@@ -2,9 +2,9 @@
 
 This repository contains practical implementations of problems, algorithms, frameworks, and knowledge representation models studied as part of my Artificial Intelligence laboratory coursework.
 
-The experiments are implemented in Python and span across fundamental AI problem-solving paradigms: state-space representation, uninformed search algorithms, graph traversal and pathfinding, tabular data preparation and feature engineering pipelines, symbolic knowledge representation and automated logical reasoning, interpretable decision tree classifiers, as well as foundational deep learning with PyTorch.
+The experiments are implemented in Python and span across fundamental AI problem-solving paradigms: state-space representation, uninformed search algorithms, graph traversal and pathfinding, tabular data preparation and feature engineering pipelines, symbolic knowledge representation and automated logical reasoning, interpretable decision tree classifiers, foundational deep learning with PyTorch, as well as advanced topics in Explainable AI (Grad-CAM), Adversarial AI (FGSM), and unsupervised dimensionality reduction (PCA & SVD).
 
-The primary objective is to gain hands-on, foundational experience in representing real-world problems mathematically and symbolically, designing search and reasoning algorithms, preparing data for intelligent decision-making systems, and training neural architectures using gradient-based optimization.
+The primary objective is to gain hands-on, foundational experience in representing real-world problems mathematically and symbolically, designing search and reasoning algorithms, preparing data for intelligent decision-making systems, training neural architectures using gradient-based optimization, and evaluating model explainability and security guarantees.
 
 ---
 
@@ -160,6 +160,32 @@ This lab introduces fundamental deep learning concepts using **PyTorch** (`torch
 
 ---
 
+### Lab 7 — Explainable AI, Adversarial AI and Advanced Applications
+
+This lab explores critical challenges in modern AI deployment: interpreting deep vision models using Explainable AI (**Grad-CAM**), evaluating model vulnerability under adversarial attacks (**FGSM**), and applying linear dimensionality reduction techniques (**PCA & SVD**).
+
+| Experiment | Description | Technique / Deliverable |
+|---|---|---|
+| Grad-CAM Explainability | Visualizing CNN attention on CIFAR-10: forward/backward hook registration, Global Average Pooling of gradients, class activation heatmaps, and spatial feature localization. | [`Lab7/grad_cam_explainability.ipynb`](Lab7/grad_cam_explainability.ipynb) |
+| FGSM Adversarial Attack | White-box adversarial generation on CIFAR-10 using the Fast Gradient Sign Method, evaluating robustness and accuracy collapse across perturbation budgets ($\epsilon \in [0, 0.30]$). | [`Lab7/fgsm_adversarial_attack.ipynb`](Lab7/fgsm_adversarial_attack.ipynb) |
+| PCA and SVD Dimensionality Reduction | Unsupervised dimensionality reduction on the Iris dataset, scree plot analysis ($95.81\%$ retained variance), 2D class separation, and mathematical proof of PCA $\equiv$ SVD ($\Delta < 10^{-14}$). | [`Lab7/pca_svd_dimensionality_reduction.ipynb`](Lab7/pca_svd_dimensionality_reduction.ipynb) |
+| Advanced AI Visualizations | Exported diagnostic figures: 3-panel Grad-CAM activation heatmap overlay, clean vs. adversarial comparison, and 2D PCA projection scatter plot. | [`Lab7/outputs/`](Lab7/outputs/) (`grad_cam_visualization.png`, `adversarial_comparison.png`, `pca_visualization.png`) |
+
+**Concepts covered:**
+- Explainable AI (XAI) and visual attribution for convolutional neural networks
+- Dynamic PyTorch hook architecture (`register_forward_hook`, `register_full_backward_hook`)
+- Gradient-Weighted Class Activation Mapping (Grad-CAM) mathematical formulation
+- Adversarial vulnerability and the Linearity Hypothesis in deep models (Goodfellow et al.)
+- Fast Gradient Sign Method (FGSM) and $\ell_\infty$-bounded input perturbation generation
+- Empirical model robustness quantification as a function of perturbation magnitude ($\epsilon$)
+- Feature standardization and variance maximization in linear projections
+- Principal Component Analysis (spectral eigen-decomposition of sample covariance $\Sigma = V \Lambda V^T$)
+- Singular Value Decomposition ($X = U \Sigma V^T$) and exact mathematical equivalence with PCA ($\lambda_i = \frac{s_i^2}{N-1}$)
+
+[View Lab 7 – Source Code and Documentation](Lab7/README.md)
+
+---
+
 ## Algorithms and Methods Implemented
 
 ### Breadth-First Search (BFS)
@@ -196,11 +222,23 @@ Non-parametric recursive partitioning that recursively minimizes Gini Impurity t
 
 ### Automatic Differentiation & Dynamic Graphs (PyTorch Autograd)
 Reverse-mode automatic differentiation that dynamically constructs Directed Acyclic Graphs during forward propagation and evaluates exact parameter gradients via the chain rule.
-- **Used in:** Computing gradients $\frac{\partial \mathcal{L}}{\partial W}$ and $\frac{\partial \mathcal{L}}{\partial b}$ for parametric neural models.
+- **Used in:** Computing gradients $\frac{\partial \mathcal{L}}{\partial W}$ and $\frac{\partial \mathcal{L}}{\partial b}$ for parametric neural models, and input image gradients $\nabla_x \mathcal{L}$ for adversarial attacks.
 
 ### Parametric Deep Learning Optimization
 Iterative optimization algorithms updating continuous parameter tensors along negative gradient vectors to minimize empirical loss surfaces.
-- **Used in:** Linear regression using SGD with MSE loss, and non-linear Multi-Layer Perceptron (MLP) classification using Adam with BCEWithLogitsLoss.
+- **Used in:** Linear regression using SGD with MSE loss, non-linear Multi-Layer Perceptron (MLP) classification using Adam, and lightweight CNN feature learning.
+
+### Explainable AI (Grad-CAM)
+Gradient-Weighted Class Activation Mapping that computes the gradient of target class logits with respect to final convolutional feature maps, applying Global Average Pooling to weight feature maps and rectifying with ReLU to produce discriminative spatial heatmaps.
+- **Used in:** Explaining visual decision rationale on CIFAR-10 image classification.
+
+### Adversarial Perturbation Generation (FGSM)
+White-box adversarial attack synthesizing $\ell_\infty$-bounded perturbations along the gradient sign direction $x_{\text{adv}} = \text{clip}(x + \epsilon \cdot \text{sign}(\nabla_x \mathcal{L}), 0, 1)$ to test neural network robustness.
+- **Used in:** Evaluating CNN resilience under adversarial noise across varying budgets ($\epsilon \in [0, 0.30]$).
+
+### Dimensionality Reduction (PCA & SVD)
+Projecting high-dimensional feature spaces onto maximal variance orthogonal axes via covariance eigen-decomposition and singular value matrix factorization ($X = U \Sigma V^T$).
+- **Used in:** Compressing 4D Iris measurements into 2D space while preserving $95.81\%$ of total statistical variance.
 
 ---
 
@@ -209,13 +247,14 @@ Iterative optimization algorithms updating continuous parameter tensors along ne
 | Technology / Library | Version / Role | Purpose |
 |---|---|---|
 | **Python 3** | `>= 3.10` | Core programming language for all algorithms and models. |
-| **PyTorch (`torch`)** | `2.15.0+cpu` | Deep learning framework, tensor computation, autograd, and neural architectures. |
-| **NumPy** | `2.5.3` | High-performance numerical computing and array operations. |
+| **PyTorch (`torch`)** | `2.15.0+cpu` | Deep learning framework, tensor computation, autograd, CNNs, and hook mechanisms. |
+| **Torchvision** | `0.29.2+cpu` | Computer vision datasets (CIFAR-10) and tensor image transformation pipelines. |
+| **NumPy** | `2.5.3` | High-performance numerical computing, array operations, and SVD decomposition. |
 | **Pandas** | `3.0.6` | Tabular data manipulation, cleaning, aggregation, and encoding. |
-| **Matplotlib** | `3.11.2` | Plotting, axes formatting, and figure visualization. |
+| **Matplotlib** | `3.11.2` | Plotting, axes formatting, heatmap blending, and figure visualization. |
 | **Seaborn** | `0.13.2` | Statistical data visualization (distributions, heatmaps, boxplots). |
-| **Scikit-learn** | `1.9.1` | Data preprocessing transformations, statistical feature selection, Decision Trees, and metrics. |
-| **Jupyter Notebook** | Interactive Notebooks | Interactive execution and visualization rendering for Labs 3, 5, and 6. |
+| **Scikit-learn** | `1.9.1` | Data preprocessing transformations, statistical feature selection, Decision Trees, Iris dataset, and PCA. |
+| **Jupyter Notebook** | Interactive Notebooks | Interactive execution and visualization rendering for Labs 3, 5, 6, and 7. |
 | **Git & GitHub** | Version Control | Source code tracking, documentation, and repository management. |
 
 ---
@@ -225,9 +264,12 @@ Iterative optimization algorithms updating continuous parameter tensors along ne
 ```text
 Artificial_Intelligence/
 ├── README.md                          # Root laboratory repository documentation
-├── datasets/                          # Benchmark datasets for ML & data preparation
+├── datasets/                          # Benchmark datasets for ML & deep learning
 │   ├── Placement_Data_Full_Class.csv
-│   └── bank.csv
+│   ├── bank.csv
+│   ├── cifar-10-python.tar.gz         # Official CIFAR-10 Python archive
+│   └── cifar-10-python/               # Extracted CIFAR-10 batch files
+│       └── cifar-10-batches-py/
 ├── Lab1/                              # Lab 1: Introduction to Problem Solving
 │   ├── README.md
 │   ├── water_jug.py
@@ -258,12 +300,18 @@ Artificial_Intelligence/
 │   ├── decision_tree_classifier.ipynb
 │   ├── decision_tree_model.py
 │   └── outputs/                       # Exported confusion matrix, tree, feature importance
-└── Lab6/                              # Lab 6: Deep Learning using PyTorch
+├── Lab6/                              # Lab 6: Deep Learning using PyTorch
+│   ├── README.md
+│   ├── pytorch_basics.ipynb
+│   ├── linear_regression.ipynb
+│   ├── neural_network_basics.py
+│   └── outputs/                       # Exported loss curves, regression fit, decision boundary
+└── Lab7/                              # Lab 7: Explainable AI, Adversarial AI & Advanced Applications
     ├── README.md
-    ├── pytorch_basics.ipynb
-    ├── linear_regression.ipynb
-    ├── neural_network_basics.py
-    └── outputs/                       # Exported loss curves, regression fit, decision boundary
+    ├── grad_cam_explainability.ipynb
+    ├── fgsm_adversarial_attack.ipynb
+    ├── pca_svd_dimensionality_reduction.ipynb
+    └── outputs/                       # Exported Grad-CAM, adversarial comparison, PCA scatter
 ```
 
 ---
@@ -277,8 +325,6 @@ cd /home/jeet/Desktop/Artificial_Intelligence
 ```
 
 ### Running Search & Problem-Solving Experiments (Lab 1 & Lab 2)
-Each script runs standalone with no external dependencies:
-
 ```bash
 # Lab 1 examples
 python3 Lab1/water_jug.py
@@ -310,21 +356,22 @@ python3 Lab4/logical_rule_engine.py
 
 ### Running Decision Tree Experiments (Lab 5)
 ```bash
-# Execute standalone model script
 python3 Lab5/decision_tree_model.py
-
-# Or launch the interactive notebook
 jupyter notebook Lab5/decision_tree_classifier.ipynb
 ```
 
 ### Running PyTorch Deep Learning Experiments (Lab 6)
 ```bash
-# Execute standalone neural network classifier script
 python3 Lab6/neural_network_basics.py
-
-# Or launch the interactive PyTorch notebooks
 jupyter notebook Lab6/pytorch_basics.ipynb
 jupyter notebook Lab6/linear_regression.ipynb
+```
+
+### Running Explainable AI, Adversarial AI & Advanced Applications (Lab 7)
+```bash
+jupyter notebook Lab7/grad_cam_explainability.ipynb
+jupyter notebook Lab7/fgsm_adversarial_attack.ipynb
+jupyter notebook Lab7/pca_svd_dimensionality_reduction.ipynb
 ```
 
 ---
@@ -350,3 +397,4 @@ The repository reflects ongoing coursework in Artificial Intelligence:
 - [x] **Lab 4**: Knowledge Representation, Semantic Networks, Frames, and Rule Engines (Complete)
 - [x] **Lab 5**: Decision Tree Classification, Interpretability, and Overfitting Regularization (Complete)
 - [x] **Lab 6**: Deep Learning using PyTorch, Autograd, Linear Regression, and Neural Networks (Complete)
+- [x] **Lab 7**: Explainable AI (Grad-CAM), Adversarial Machine Learning (FGSM), and Dimensionality Reduction (PCA & SVD) (Complete)

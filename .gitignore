@@ -1,0 +1,12 @@
+# Large datasets (extracted)
+cifar-10-python/
+datasets/cifar-10-python/
+datasets/*.tar.gz
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
