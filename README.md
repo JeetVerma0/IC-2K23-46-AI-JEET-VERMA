@@ -264,6 +264,12 @@ Projecting high-dimensional feature spaces onto maximal variance orthogonal axes
 ```text
 Artificial_Intelligence/
 ├── README.md                          # Root laboratory repository documentation
+├── docs/                              # Academic laboratory documentation portfolio
+│   ├── diagrams/                      # System architecture & state-space diagrams
+│   ├── algorithm-flowcharts/          # Procedural algorithm execution flowcharts
+│   ├── complexity-analysis.pdf        # Algorithmic space-time complexity analysis
+│   ├── final-report.pdf               # Comprehensive 13-page academic laboratory report
+│   └── presentation.pdf               # 18-slide academic defense presentation
 ├── datasets/                          # Benchmark datasets for ML & deep learning
 │   ├── Placement_Data_Full_Class.csv
 │   ├── bank.csv
@@ -378,7 +384,21 @@ jupyter notebook Lab7/pca_svd_dimensionality_reduction.ipynb
 
 ## Documentation
 
-Each laboratory directory contains a dedicated, comprehensive `README.md` file providing:
+### Academic Documentation Directory (`docs/`)
+
+The complete, professional academic documentation for the laboratory coursework is housed in the [`docs/`](docs/) directory:
+
+| Document / Deliverable | Description | Format |
+|---|---|---|
+| **[Final Laboratory Report](docs/final-report.pdf)** | Comprehensive 13-page academic report covering all seven units, problem formulations, algorithms, code components, empirical observations, and complexity analysis. | PDF |
+| **[Academic Presentation](docs/presentation.pdf)** | Professional 18-slide academic defense presentation summarizing the laboratory's theoretical foundations, search strategies, ML/DL models, and key findings. | PDF |
+| **[Complexity Analysis](docs/complexity-analysis.pdf)** | Detailed analysis of space-time bounds, branching factors, optimality, completeness, and informed vs. uninformed search trade-offs. | PDF |
+| **[System Diagrams](docs/diagrams/)** | High-resolution technical diagrams depicting agent models, state spaces, KR graphs, PyTorch computational DAGs, Grad-CAM, and FGSM pipelines. | PNG / PUML / Draw.io |
+| **[Algorithm Flowcharts](docs/algorithm-flowcharts/)** | High-resolution procedural flowcharts for BFS, DFS, CART, PyTorch training loops, rule engines, and dimensionality reduction. | PNG / PUML / Draw.io |
+
+### Unit-Level Documentation
+
+Each laboratory directory (`Lab1/` through `Lab7/`) contains a dedicated, comprehensive `README.md` file providing:
 - Formal theoretical background and mathematical formulations
 - Algorithm step-by-step procedures and complexity analysis
 - Architectural, flowchart, and computational graph diagrams

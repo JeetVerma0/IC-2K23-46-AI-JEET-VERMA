@@ -10,3 +10,8 @@ __pycache__/
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
+
+# Diagram and flowchart source files
+*.drawio
+*.puml
+
